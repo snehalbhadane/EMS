@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="employee_skills_rating")
 public class EmployeeSkillsRating {
@@ -24,12 +26,18 @@ public class EmployeeSkillsRating {
 	@Column(name="remarks")
 	private String remarks;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="employee_feedback_id")
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="employee_feedback_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_feedback_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private EmployeeFeedback employeeFeedback;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="skill_id")
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="skill_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "skill_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private Skill skill;
 
 	public int getId() {

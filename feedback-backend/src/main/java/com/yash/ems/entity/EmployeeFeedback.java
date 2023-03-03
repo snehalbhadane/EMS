@@ -1,5 +1,6 @@
 package com.yash.ems.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,9 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="employee_feedback")
-public class EmployeeFeedback {
+public class EmployeeFeedback implements Serializable{
+
+	private static final long serialVersionUID = -5920333604782942132L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,19 +43,25 @@ public class EmployeeFeedback {
 	@Column(name="created_on")
 	private LocalDateTime createdOn;
 	
-//	@Column(name="employee_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="employee_id")
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="employee_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private Employee employee;
 	
-//	@Column(name="file_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="file_id")
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="file_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "file_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private EmployeeFeedbackFile employeeFeedbackFile;
-	
-//	@Column(name="created_by_id")
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="created_by_id")
+
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="created_by_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "created_by_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private User createdBy;
 	
 	@OneToMany(targetEntity = EmployeeSkillsRating.class, cascade = CascadeType.ALL)
