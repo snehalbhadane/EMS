@@ -4,7 +4,11 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * This class s used to store and transfer user information for report module.
+ * @author prachi.kurhe
+ * @since 01--3-2023
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

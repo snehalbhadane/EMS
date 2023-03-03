@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.apache.logging.log4j.util.Strings.isNotBlank;
 
+/**
+ * This class s used to expose rest api for report module.
+ * @author prachi.kurhe
+ * @since 01--3-2023
+ */
 @RestController
 @RequestMapping("/reports")
 @RequiredArgsConstructor

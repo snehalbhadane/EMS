@@ -1,0 +1,8 @@
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant-path-matcher
+#  sql:
+#    init:
+#      mode: always
+
+

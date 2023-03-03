@@ -9,6 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is used to implement api specifications defined by {@link ReportService}.
+ * @author prachi.kurhe
+ * @since 01--3-2023
+ */
 @Service
 public class ReportServiceImpl implements ReportService {
     //TODO need to remove as this is the mock data .
