@@ -1,0 +1,62 @@
+<h3>Onboarding Employee</h3><br>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="employeeId">Employee Id:</label>
+            <input type="userName" class="form-control" placeholder="Enter Id" name="employeeId"[(ngModel)]="employee.employeeId" required #employeeId="ngModel"
+            [class.is-invalid]="employeeId.invalid && employeeId.touched " >
+            <small class="text-danger"[class.d-none]="employeeId.valid || employeeId.untouched ">EmployeeId is required </small>
+          </div><br>
+       <div class="form-group">
+        <label for="userName">Employee Name:</label>
+        <input type="userName" class="form-control" placeholder="Enter Name" name="userName"[(ngModel)]="employee.employeeName" required #employeeName="ngModel"
+        [class.is-invalid]="employeeName.invalid && employeeName.touched " >
+        <small class="text-danger"[class.d-none]="employeeName.valid || employeeName.untouched ">userName is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="doj">Date Of Joining:</label>
+        <input type="userName" class="form-control" placeholder="Enter date" name="doj"[(ngModel)]="employee.doj" required #doj="ngModel"
+        [class.is-invalid]="doj.invalid && employeeId.touched " >
+        <small class="text-danger"[class.d-none]="doj.valid || doj.untouched ">Date of joiing is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="totalExp">Total Experinces:</label>
+        <input type="totalExp" class="form-control" placeholder="Total experinces" name="totalExp"[(ngModel)]="employee.totalExp" required #totalExp="ngModel"
+        [class.is-invalid]="totalExp.invalid && totalExp.touched " >
+        <small class="text-danger"[class.d-none]="totalExp.valid || totalExp.untouched "> Experinces is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="reportingManager">Reporting Manager:</label>
+        <input type="reportingManager" class="form-control" placeholder="Enter reporting Manager" name="employeeId"[(ngModel)]="employee.reportingManager" required #reportingManager="ngModel"
+        [class.is-invalid]="reportingManager.invalid && reportingManager.touched " >
+        <small class="text-danger"[class.d-none]="reportingManager.valid || reportingManager.untouched ">Reporting Manager is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="designation">Designation:</label>
+        <input type="designation" class="form-control" placeholder="Enter designation" name="designation"[(ngModel)]="employee.designation" required #designation="ngModel"
+        [class.is-invalid]="designation.invalid && reportingManager.touched " >
+        <small class="text-danger"[class.d-none]="designation.valid || designation.untouched ">Designation is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="email">Email Id:</label>
+        <input type="email" class="form-control" placeholder="Enter email id" name="email"[(ngModel)]="employee.email" required #email="ngModel"
+        [class.is-invalid]="email.invalid && reportingManager.touched " >
+        <small class="text-danger"[class.d-none]="reportingManager.valid || email.untouched ">Email id  is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="baseLocation">Base Loaction:</label>
+        <input type="baseLocation" class="form-control" placeholder="Enter base location" name="employeeId"[(ngModel)]="employee.baseLocation" required #baseLocation="ngModel"
+        [class.is-invalid]="baseLocation.invalid && baseLocation.touched " >
+        <small class="text-danger"[class.d-none]="baseLocation.valid || baseLocation.untouched ">Reporting Manager is required </small>
+      </div><br>
+      <div class="form-group">
+        <label for="poolStatus">Pool Status:</label>
+        <input type="poolStatus" class="form-control" placeholder="Enter pool status" name="employeeId"[(ngModel)]="employee.poolStatus" required #poolStatus="ngModel"
+        [class.is-invalid]="poolStatus.invalid && poolStatus.touched " >
+        <small class="text-danger"[class.d-none]="poolStatus.valid || poolStatus.untouched ">Reporting Manager is required </small>
+      </div><br>
+
+       
+        <button class="btn btn-success" type="submit"> Submit</button>
+    
+    </form> 

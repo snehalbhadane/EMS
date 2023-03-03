@@ -1,0 +1,9 @@
+h2{
+    color: rgb(67, 145, 247);
+    text-align: center;
+}
+.BackgroundImage{
+   background-image:url("https://www.google.com/url?sa=i&url=https%3A%2F%2Felearningindustry.com%2Fdesigning-employee-onboarding-program-dos-donts&psig=AOvVaw2B1MdfWT0Y7KayROMVDOoA&ust=1677904897523000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCNDv0a75vv0CFQAAAAAdAAAAABAD");
+   height: fit-content;
+   width: fit-content;
+}
