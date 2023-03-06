@@ -15,6 +15,7 @@ public class CompetencyEmsProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CompetencyEmsProjectApplication.class, args);
 	}
+	
 //	public Docket apis() {
 //		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.yash.ems")).build();
 //	}

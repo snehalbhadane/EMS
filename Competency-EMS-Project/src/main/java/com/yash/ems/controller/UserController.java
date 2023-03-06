@@ -23,50 +23,47 @@ public class UserController {
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	
     @Autowired
     private UserService userService;
-
+    
+    
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     //creating user
+    
+    
     @PostMapping("/")
     public User createUser(@RequestBody User user) throws Exception {
     	
     	 Role role = new Role();
- 	  
-  
+    	 
       	logger.info("Data From UI"+user);
-    	
+      	
     	if(user.getEmpDesignation().contains("Competency Member")) {
-   		
+    		
    		role.setRoleId(44L);
    		role.setRoleName("Competency Member");
    		
    		logger.info("User Register for Role -Competency Member ");
-    	}
-    	else {
+   		
+   		
+    	}else {
    		role.setRoleId(45L);
+   		
            role.setRoleName("Delivery Team/Client");
-           logger.info("User Register for Role -Competency Member ");
-  		
+           logger.info("User Register for Role -Competency Member ");	
   	}
-
-    	
-    	
-
-       
         //encoding password with bcryptpasswordencoder
-
 //        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
-
         Set<UserRole> roles = new HashSet<>();
-
+        
 //        Role role = new Role();
 //        role.setRoleId(44L);
 //        role.setRoleName("ADMIN");
-
+        
         UserRole userRole = new UserRole();
+        
         userRole.setUser(user);
         userRole.setRole(role);
 
