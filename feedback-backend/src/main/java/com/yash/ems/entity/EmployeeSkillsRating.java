@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -31,6 +32,7 @@ public class EmployeeSkillsRating {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_feedback_id", referencedColumnName = "id")
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+	@JsonBackReference
 	private EmployeeFeedback employeeFeedback;
 	
 //	@ManyToOne(fetch=FetchType.LAZY)

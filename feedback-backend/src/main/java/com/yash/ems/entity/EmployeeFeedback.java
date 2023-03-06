@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="employee_feedback")
@@ -64,7 +65,8 @@ public class EmployeeFeedback implements Serializable{
 	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private User createdBy;
 	
-	@OneToMany(targetEntity = EmployeeSkillsRating.class, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@OneToMany(targetEntity = EmployeeSkillsRating.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_feedback_id", referencedColumnName = "id")
 	private List<EmployeeSkillsRating> employeeSkillsRatings;
 
