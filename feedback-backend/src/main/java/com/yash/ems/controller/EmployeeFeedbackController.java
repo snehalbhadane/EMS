@@ -1,11 +1,17 @@
 package com.yash.ems.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,9 +58,10 @@ public class EmployeeFeedbackController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(EmployeeFeedback);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "upload employee feedback data")
 	@PostMapping("/upload-employee-feedback")
-	public ResponseEntity<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)throws SQLException, IOException {
 		
 		String methodName = "uploadEmployeeFeedback()";
 		logger.info(methodName + " called");
@@ -62,12 +69,34 @@ public class EmployeeFeedbackController {
 		User createdBy = new User();
 		createdBy.setId(1);
 		
-		List<String> errorList = feedbackService.uploadEmployeeFeedback(file, createdBy);
-		
-		System.out.println("List : "+errorList.size());
-		
-		errorList.forEach(System.out::print);
+		return (ResponseEntity<String>) feedbackService.uploadEmployeeFeedback(file, createdBy);
+	}
 	
-		return null;
+	@GetMapping(value = "/download-employee-feedback-template")
+	public ResponseEntity<ByteArrayResource> downloadEmployeeFeedbackTemplate() throws Exception {
+		
+		String methodName = "downloadEmployeeFeedbackTemplate()";
+		logger.info(methodName + " called");
+		
+		try {
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			
+			SXSSFWorkbook workbook = feedbackService.downloadEmployeeFeedbackTemplate();
+			
+			HttpHeaders header = new HttpHeaders();
+			header.setContentType(new MediaType("application", "force-download"));
+			header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename = employeeFeedbackTemplate.xlsx");
+			workbook.write(stream);
+			stream.close();
+			
+			return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
+					header, HttpStatus.CREATED);
+			
+		}catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
+
+
+

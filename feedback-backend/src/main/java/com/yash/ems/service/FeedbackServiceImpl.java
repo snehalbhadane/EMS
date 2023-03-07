@@ -1,25 +1,36 @@
 package com.yash.ems.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yash.ems.config.LoggerConfiguration;
 import com.yash.ems.entity.Employee;
 import com.yash.ems.entity.EmployeeFeedback;
+import com.yash.ems.entity.EmployeeFeedbackFile;
 import com.yash.ems.entity.EmployeeSkillsRating;
 import com.yash.ems.entity.Skill;
 import com.yash.ems.entity.User;
+import com.yash.ems.repository.EmployeeFeedbackFileRepository;
 import com.yash.ems.repository.EmployeeFeedbackRepository;
 import com.yash.ems.repository.EmployeeRepository;
 import com.yash.ems.repository.SkillRepository;
@@ -30,6 +41,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 	Logger logger = LoggerConfiguration.getLogger(FeedbackServiceImpl.class);
 	
 	@Autowired
+	private Environment env;
+	
+	@Autowired
 	private EmployeeFeedbackRepository employeeFeedbackRepository;
 	
 	@Autowired
@@ -37,6 +51,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 	
 	@Autowired
 	private SkillRepository skillRepository; 
+	
+	@Autowired
+	private EmployeeFeedbackFileRepository employeeFeedbackFileRepository; 
 
 	@Override
 	public List<EmployeeFeedback> getAllEmployeeFedback() {
@@ -68,7 +85,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	}
 	
 	@Override
-	public List<String> uploadEmployeeFeedback(MultipartFile file, User createdBy) {
+	public List<String> uploadEmployeeFeedback(MultipartFile file, User createdBy)throws IOException {
 		
 		String methodName = "uploadEmployeeFeedback()";
 		logger.info(methodName + " called");
@@ -126,15 +143,15 @@ public class FeedbackServiceImpl implements FeedbackService {
 									empCode = String.valueOf(String.format("%.0f", cell.getNumericCellValue()));
 
 									if(empName != null && empName.length() > 0 && empCode != null && empCode.length() > 0) {
-		
-									//	Employee employee = employeeRepository.getEmployeeByNameAndCode(empName, empCode);
-										Employee employee = new Employee();
-										employee.setId(1);
+	
+										Employee employee = employeeRepository.getEmployeeByNameAndCode(empName, empCode);
 						
 										if(employee != null && employee.getId() > 0)
 											ef.setEmployee(employee);
-										else
-											errorList.add("Insert correct employe name and employee code in cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1));
+										else {
+											errorList.add("Insert correct employe name in cell - " + CellReference.convertNumToColString(j-1)+""+(inputRow.getRowNum()+1));
+											errorList.add("Insert correct employee code in cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1));
+										}	
 									}
 								}
 								else {
@@ -172,13 +189,23 @@ public class FeedbackServiceImpl implements FeedbackService {
 											if(k == 0) {
 												esr = new EmployeeSkillsRating();
 												esr.setSkill(skills.get(s));
-												esr.setRating((int)cell.getNumericCellValue());
+												
+												if(cell != null) {
+													esr.setRating((int)cell.getNumericCellValue());
+												}
+												else {
+													errorList.add("Cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1) + ":: is empty.");
+												}
 											}
 											else {
-												esr.setRemarks(cell.getStringCellValue());
+												if(cell != null) {
+													esr.setRemarks(cell.getStringCellValue());
+												}
+												else {
+													errorList.add("Cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1) + ":: is empty.");
+												}
 												
 												esrl.add(esr);
-												
 											}
 											
 											cid++;
@@ -189,7 +216,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 									}
 									ef.setEmployeeSkillsRatings(esrl);
 								}
-								cid--;
+								cid--;j--;
 							}
 							
 							else if(cid == noOfColumns - 2) {
@@ -200,7 +227,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 									errorList.add("Cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1) + ":: is empty.");
 								}
 							}
-							else if(cid == noOfColumns - 1) {
+							else if(cid == noOfColumns - 1 && cell != null) {
 								ef.setSuggestion(cell.getStringCellValue());
 							}
 							
@@ -213,7 +240,23 @@ public class FeedbackServiceImpl implements FeedbackService {
 					}
 					
 					if(errorList.size() == 0) {
+						
+						String fileName = file.getOriginalFilename();
+						
+						EmployeeFeedbackFile  employeeFeedbackFile = this.employeeFeedbackFile(fileName, createdBy);
+						
+						if(employeeFeedbackFile != null && employeeFeedbackFile.getId() > 0) {
+						
+							String fileUploadPath = env.getProperty("EMPLOYEE_FEEDBACK_FILE_UPLOAD_PATH");
+							String filePath = fileUploadPath + File.separator + employeeFeedbackFile.getId() + "." +
+									fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
 
+							File f = new File(filePath);
+							f.createNewFile();
+							
+							employeeFeedbacks.forEach(e -> e.setEmployeeFeedbackFile(employeeFeedbackFile));
+						}
+						
 						employeeFeedbackRepository.saveAll(employeeFeedbacks);
 					}
 				}
@@ -225,4 +268,85 @@ public class FeedbackServiceImpl implements FeedbackService {
 		
 		return errorList;
 	}
-} 
+	
+	private EmployeeFeedbackFile  employeeFeedbackFile(String fileName, User uploadedBy) {
+		
+		EmployeeFeedbackFile  employeeFeedbackFile = new EmployeeFeedbackFile();
+		
+		employeeFeedbackFile.setFileName(fileName);
+		employeeFeedbackFile.setUploadedBy(uploadedBy);
+		employeeFeedbackFile.setUploadedOn(LocalDateTime.now());
+		
+		employeeFeedbackFileRepository.save(employeeFeedbackFile);
+		
+		return employeeFeedbackFile;
+	}
+	
+	@Override
+	public SXSSFWorkbook downloadEmployeeFeedbackTemplate() {
+		
+		String methodName = "downloadEmployeeFeedbackTemplate()";
+		logger.info(methodName + " called");
+		
+		int cellCount = 0;
+		
+		List<Skill> skills = skillRepository.findAll();
+
+		SXSSFWorkbook workbook = new SXSSFWorkbook();
+		
+		SXSSFSheet sheet = workbook.createSheet("Employee-feedback");
+		
+		Row headerRow = sheet.createRow(1);
+		
+		CellStyle style = workbook.createCellStyle();
+		style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+
+		Font font = workbook.createFont();
+		font.setColor(IndexedColors.BLACK.getIndex());
+		style.setFont(font);
+
+		headerRow.createCell(cellCount).setCellValue("Sno");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+		
+		headerRow.createCell(cellCount).setCellValue("Emp Name");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+
+		headerRow.createCell(cellCount).setCellValue("Emp Code");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+
+		headerRow.createCell(cellCount).setCellValue("Overall Experience (In Years)");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+
+		headerRow.createCell(cellCount).setCellValue("Project Experience (In Years)");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+		
+		if(skills != null && skills.size() > 0) {
+			for(int i = 0; i < skills.size(); i++) {
+				
+				headerRow.createCell(cellCount).setCellValue("Rating");
+				headerRow.getCell(cellCount++).setCellStyle(style);
+				
+				headerRow.createCell(cellCount).setCellValue("Comment");
+				headerRow.getCell(cellCount++).setCellStyle(style);
+			}
+		}
+		
+		headerRow.createCell(cellCount).setCellValue("Overall Comments");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+
+		headerRow.createCell(cellCount).setCellValue("Suggestion");
+		headerRow.getCell(cellCount++).setCellStyle(style);
+	
+	//	this.autoSizeColumns(sheet, cellCount);
+		
+		return workbook;
+	}
+	
+	private void autoSizeColumns(SXSSFSheet workSheet, int columnCount) {
+		if(workSheet != null && columnCount > 0) {
+			for(int i=0; i<columnCount; i++) {
+				workSheet.autoSizeColumn(i);
+			}
+		}
+	}
+}

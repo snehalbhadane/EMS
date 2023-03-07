@@ -1,7 +1,9 @@
 package com.yash.ems.service;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yash.ems.entity.EmployeeFeedback;
@@ -13,5 +15,7 @@ public interface FeedbackService {
 	
 	public EmployeeFeedback saveEmployeeFeedback(EmployeeFeedback employeeFeedback);
 	
-	public List<String> uploadEmployeeFeedback(MultipartFile file, User createdBy);
+	public List<String> uploadEmployeeFeedback(MultipartFile file, User createdBy)throws IOException;
+	
+	public SXSSFWorkbook downloadEmployeeFeedbackTemplate();
 }

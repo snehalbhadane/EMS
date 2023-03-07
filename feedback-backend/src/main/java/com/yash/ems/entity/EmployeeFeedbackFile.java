@@ -4,10 +4,15 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="employee_feedback_file")
@@ -23,10 +28,10 @@ public class EmployeeFeedbackFile {
 	@Column(name="uploaded_on")
 	private LocalDateTime uploadedOn;
 
-//	@Column(name="uploaded_by_id")
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "uploaded_by_id")
-//	private User uploadedBy;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "uploaded_by_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+	private User uploadedBy;
 
 	public int getId() {
 		return id;
@@ -45,5 +50,11 @@ public class EmployeeFeedbackFile {
 	}
 	public void setUploadedOn(LocalDateTime uploadedOn) {
 		this.uploadedOn = uploadedOn;
+	}
+	public User getUploadedBy() {
+		return uploadedBy;
+	}
+	public void setUploadedBy(User uploadedBy) {
+		this.uploadedBy = uploadedBy;
 	}
 }
