@@ -1,0 +1,156 @@
+<div class="row">
+  <div class="col-3 leftside">
+    <a href="">
+      <img src="assets/yash-logo.png" class="image1 img-fluid" alt="cars" />
+    </a>
+
+    <hr style="color: white" />
+    <nav class="main-menu" role="navigation">
+      <ul class="main-menu">
+        <div class="main-menu1">
+          <li class="nav1">
+            <a class="nav2" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <br />
+        </div>
+        <div class="main-menu2">
+          <li class="nav1">
+            <a routerLink="/feedback-list" class="nav2">Feedback list</a>
+          </li>
+          <br />
+        </div>
+        <div class="main-menu3">
+          <li class="nav1">
+            <a routerLink="/upload-feedback" class="nav2"> Feedback-upload</a>
+          </li>
+          <br />
+        </div>
+      </ul>
+    </nav>
+  </div>
+  <div class="col-9 block">
+    <div class="block"></div>
+
+    <div class="content">
+      <h1 style="color:red;">Add-feedback</h1>
+      <form>
+        <table style="width: 100%" cellPadding="10" cellSpacing="10">
+          <tr>
+            <td>Employee id:
+            <select name="id" id="">
+              <option value="-1">Emp Id</option>
+              <option value="1016559">1015659</option>
+            </select>
+          </td>
+          </tr>
+          <tr>
+            <td>Overall Experience:
+              
+
+            <select>
+              <option value="-1">Overwall Experience</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </td>
+          </tr>
+          <tr>
+            <td>Project Experience:
+            <!-- <td><input type="text" placeholder="Employee id"></td> -->
+            <select>
+              <option value="-1">Your Project Experience</option>
+              
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </td>
+          </tr>
+        </table>
+
+        <table style="width:100%; margin-top: 20px;" >
+          <tr>
+            <th>Sr No</th>
+            <th>Skill</th>
+            <th>Rating</th>
+            <th>Comment</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Java</td>
+            <td>
+              <select name="rating" id="">
+                <option value="-1">Select Rating</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td><input type="text" placeholder="comment"></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>HTML</td>
+            <td>
+              <select name="rating" id="">
+                <option value="-1">Select Rating</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+              </select>
+            </td>
+            <td><input type="text" placeholder="comment"></td>
+          </tr>
+        </table>
+        <table style="width: 100%; margin-top: 20px" cellPadding="10" cellSpacing="10">
+          <tr>
+            <td > Comment: 
+            <textarea placeholder="comment" row="4" style="width: 30%;"></textarea></td>
+          </tr>
+          <tr>
+            <td>suggestion:
+            <textarea placeholder="suggestion" row="4"style="width: 30%;"></textarea></td>
+          </tr>
+        
+        </table>
+
+        <button class="btn btn-primary" style="margin-top: 8px;">submit</button>
+
+
+
+
+
+
+      </form>
+    </div>
+  </div>
+</div>

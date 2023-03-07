@@ -1,0 +1,30 @@
+.leftside{
+    background-color: rgb(75, 196, 75);
+    height: 100vh;
+    color: black;
+}
+
+.image1{
+    height: 100px;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+    /* margin-left: 30px;
+    margin-top: 20px; */
+}
+.block{
+    height: 130px;
+ 
+    background-color: gray;
+    
+}
+.content{
+    text-align: center;
+}
+
+
+.container{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
