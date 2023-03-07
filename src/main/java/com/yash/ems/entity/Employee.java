@@ -28,15 +28,15 @@ public class Employee {
 	@Column(name="experience")
 	private String experience;
 	
-	@OneToMany
-	private List<Skill> skills=new ArrayList<>();
+//	@OneToMany
+//	private List<Skill> skills=new ArrayList<>();
 
-	public List<Skill> getSkills() {
-		return skills;
-	}
-	public void setSkills(List<Skill> skills) {
-		this.skills = skills;
-	}
+//	public List<Skill> getSkills() {
+//		return skills;
+//	}
+//	public void setSkills(List<Skill> skills) {
+//		this.skills = skills;
+//	}
 	public int getId() {
 		return id;
 	}
