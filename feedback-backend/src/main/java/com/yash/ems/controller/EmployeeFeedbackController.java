@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.yash.ems.config.LoggerConfiguration;
 import com.yash.ems.entity.EmployeeFeedback;
 import com.yash.ems.entity.User;
@@ -61,7 +63,7 @@ public class EmployeeFeedbackController {
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "upload employee feedback data")
 	@PostMapping("/upload-employee-feedback")
-	public ResponseEntity<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)throws SQLException, IOException {
+/*	public ResponseEntity<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)throws SQLException, IOException {
 		
 		String methodName = "uploadEmployeeFeedback()";
 		logger.info(methodName + " called");
@@ -70,7 +72,20 @@ public class EmployeeFeedbackController {
 		createdBy.setId(1);
 		
 		return (ResponseEntity<String>) feedbackService.uploadEmployeeFeedback(file, createdBy);
-	}
+	} */
+	
+	public List<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)
+			throws JsonParseException, JsonMappingException, IOException,
+			SQLException  {
+
+		String methodName = "uploadEmployeeFeedback()";
+		logger.info(methodName + " called");
+		
+		User createdBy = new User();
+		createdBy.setId(1);
+		
+		return feedbackService.uploadEmployeeFeedback(file, createdBy);
+    }
 	
 	@GetMapping(value = "/download-employee-feedback-template")
 	public ResponseEntity<ByteArrayResource> downloadEmployeeFeedbackTemplate() throws Exception {
@@ -81,7 +96,7 @@ public class EmployeeFeedbackController {
 		try {
 			ByteArrayOutputStream stream = new ByteArrayOutputStream();
 			
-			SXSSFWorkbook workbook = feedbackService.downloadEmployeeFeedbackTemplate();
+			XSSFWorkbook workbook = feedbackService.downloadEmployeeFeedbackTemplate();
 			
 			HttpHeaders header = new HttpHeaders();
 			header.setContentType(new MediaType("application", "force-download"));
@@ -97,6 +112,3 @@ public class EmployeeFeedbackController {
 		}
 	}
 }
-
-
-

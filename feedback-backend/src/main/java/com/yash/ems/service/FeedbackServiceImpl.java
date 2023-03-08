@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -251,8 +253,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 							String filePath = fileUploadPath + File.separator + employeeFeedbackFile.getId() + "." +
 									fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
 
-							File f = new File(filePath);
-							f.createNewFile();
+							try {
+								File f = new File(filePath);
+								f.createNewFile();
+							}
+							catch (IOException e) {
+								e.printStackTrace();
+							}
 							
 							employeeFeedbacks.forEach(e -> e.setEmployeeFeedbackFile(employeeFeedbackFile));
 						}
@@ -283,7 +290,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	}
 	
 	@Override
-	public SXSSFWorkbook downloadEmployeeFeedbackTemplate() {
+	public XSSFWorkbook downloadEmployeeFeedbackTemplate() {
 		
 		String methodName = "downloadEmployeeFeedbackTemplate()";
 		logger.info(methodName + " called");
@@ -292,18 +299,34 @@ public class FeedbackServiceImpl implements FeedbackService {
 		
 		List<Skill> skills = skillRepository.findAll();
 
-		SXSSFWorkbook workbook = new SXSSFWorkbook();
+		XSSFWorkbook workbook = new XSSFWorkbook();
 		
-		SXSSFSheet sheet = workbook.createSheet("Employee-feedback");
+		XSSFSheet sheet = workbook.createSheet("Employee-feedback");
+		
+		Row topRow = sheet.createRow(0);
 		
 		Row headerRow = sheet.createRow(1);
 		
-		CellStyle style = workbook.createCellStyle();
-		style.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+		XSSFCellStyle style = (XSSFCellStyle) workbook.createCellStyle();
+		style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.index);
+		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
 		Font font = workbook.createFont();
 		font.setColor(IndexedColors.BLACK.getIndex());
 		style.setFont(font);
+		
+		CellStyle style1 = workbook.createCellStyle();
+		style1.setFillForegroundColor(IndexedColors.RED.getIndex());
+		style1.setAlignment(HorizontalAlignment.CENTER);
+		
+		Font font1 = workbook.createFont();
+		font1.setColor(IndexedColors.RED.getIndex());
+		font1.setBold(true);
+		style1.setFont(font1);
+		
+		topRow.createCell(0).setCellValue("Note: Please give rating between 1 to 5.");
+		topRow.getCell(0).setCellStyle(style1);
+		sheet.addMergedRegion(CellRangeAddress.valueOf("A1:D1"));
 
 		headerRow.createCell(cellCount).setCellValue("Sno");
 		headerRow.getCell(cellCount++).setCellStyle(style);
@@ -321,7 +344,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 		headerRow.getCell(cellCount++).setCellStyle(style);
 		
 		if(skills != null && skills.size() > 0) {
+			
 			for(int i = 0; i < skills.size(); i++) {
+
+				topRow.createCell(cellCount).setCellValue(skills.get(i).getName());
+				topRow.getCell(cellCount).setCellStyle(style1);
+	
+				sheet.addMergedRegion(CellRangeAddress.valueOf(CellReference.convertNumToColString(cellCount)+""+1 +":"+ CellReference.convertNumToColString(cellCount+1)+""+1));
 				
 				headerRow.createCell(cellCount).setCellValue("Rating");
 				headerRow.getCell(cellCount++).setCellStyle(style);
@@ -337,12 +366,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 		headerRow.createCell(cellCount).setCellValue("Suggestion");
 		headerRow.getCell(cellCount++).setCellStyle(style);
 	
-	//	this.autoSizeColumns(sheet, cellCount);
+		autoSizeColumns(sheet, 15);
 		
 		return workbook;
 	}
 	
-	private void autoSizeColumns(SXSSFSheet workSheet, int columnCount) {
+	private void autoSizeColumns(XSSFSheet workSheet, int columnCount) {
+		
 		if(workSheet != null && columnCount > 0) {
 			for(int i=0; i<columnCount; i++) {
 				workSheet.autoSizeColumn(i);
