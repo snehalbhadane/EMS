@@ -12,20 +12,20 @@ export class EmployeeService {
 
 
   getEmployeesList():Observable<Employee[]>{
-    return this.httpClient.get<Employee[]>(this.baseURL);
+    return this.httpClient.get<Employee[]>(this.baseURL+'/getAllEmployeeData');
 
   }
   createEmployee(employee:Employee):Observable<Object>{
-      return this.httpClient.post((this.baseURL),employee);
+      return this.httpClient.post((this.baseURL+'/addEmployeeData'),employee);
   }
-  getEmployeeById(employeeId: number): Observable<any> {
-    return this.httpClient.get(`${this.baseURL}/${employeeId}`);
+  getEmployee(employeeId: number): Observable<any> {
+    return this.httpClient.get(`${this.baseURL+'/getEmployee'}/${employeeId}`);
   }
   updateEmployee(employeeId: number, value: any): Observable<Object> {
-    return this.httpClient.put(`${this.baseURL}/${employeeId}`, value);
+    return this.httpClient.put(`${this.baseURL+'/updateEmployee'}/${employeeId}`, value);
   }
   deleteEmployee(employeeId: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseURL}/${employeeId}`, { responseType: 'text' });
+    return this.httpClient.delete(`${this.baseURL+'/deleteEmployee'}/${employeeId}`, { responseType: 'text' });
   }
 
 }

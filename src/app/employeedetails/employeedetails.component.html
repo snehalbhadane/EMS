@@ -1,30 +1,48 @@
 <h3>Employee Details</h3>
 <div>
-    <div>
-       <label> <b>Employee Id: </b></label>{{employee.employeeId}}
-    </div>
-    <div>
-        <label> <b>Employee Name: </b></label>{{employee.employeeName}}
-     </div>
-     <div>
-        <label> <b> Data of Joining: </b></label>{{employee.doj}}
-     </div>
-     <div>
-        <label> <b> Total Experiences: </b></label>{{employee.totalExp}}
-     </div>
-     <div>
-        <label> <b> Reporting Manager: </b></label>{{employee.reportingManager}}
-     </div>
-     <div>
-        <label> <b> Designation: </b></label>{{employee.designation}}
-     </div>
-     <div>
-        <label> <b> Email Id: </b></label>{{employee.email}}
-     </div>
-     <div>
-        <label> <b> Base Location: </b></label>{{employee.baseLocation}}
-     </div>
-     <div>
-        <label><b>Pool Satus</b></label>{{employee.poolStatus}}
-     </div>
-     </div>
+   
+   <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/employeelist']">Back</button>
+  
+<!-- <div class="form-group"> -->
+   <div class="container" >
+   <div>
+      <label> <b>Employee Id: </b></label>{{employee.employeeId}}
+   </div>
+   <div>
+      <label> <b>Employee Name: </b></label>{{employee.employeeName}}
+   </div>
+   <div>
+      <label> <b> Email Id: </b></label>{{employee.email}}
+   </div>
+   <div>
+      <label> <b> Designation: </b></label>{{employee.designation}}
+   </div>
+   <div>
+      <label> <b> Grade: </b></label>{{employee.grade}}
+   </div>
+
+   <div>
+      <label> <b> ResourceType: </b></label>{{employee.resourceType}}
+   </div>
+
+   <div>
+      <label> <b>Joining Date: </b></label>{{employee.doj}}
+   </div>
+   <div>
+      <label> <b> Total Experiences: </b></label>{{employee.totalExp}}
+   </div>
+   <div>
+      <label> <b> Reporting Manager: </b></label>{{employee.irm}}
+   </div>
+
+   <div>
+      <label> <b> Current Location: </b></label>{{employee.currentLocation}}
+   </div>
+   <div>
+      <label> <b> Current Allocation: </b></label>{{employee.currentAllocation}}
+   </div>
+   <div>
+      <label><b>Project</b></label>{{employee.project}}
+   </div>
+</div>
+</div>

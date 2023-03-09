@@ -9,7 +9,12 @@ import { EmployeeService } from '../Service/employee.service';
   styleUrls: ['./employeelist.component.css']
 })
 export class EmployeelistComponent implements OnInit {
+deleteEmp(arg0: any) {
+throw new Error('Method not implemented.');
+}
   employees: Employee[];
+empList: any;
+serchtext: any;
   constructor(private employeeService:EmployeeService,private router :Router){}
 
   ngOnInit(): void {
@@ -22,18 +27,24 @@ export class EmployeelistComponent implements OnInit {
       this.employees=data;
     }/* ,error=>console.log(error) */);
    }
-   employeeDetails(id:number){
-    this.router.navigate(['employeedetails',id]);
+   employeeDetails(employeeId:number){
+    this.router.navigate(['employeedetails',employeeId]);
    }
-   updateEmployee(id:number){
-   this.router.navigate(['update-employee',id]);
+   updateEmployee(employeeId:number){
+   this.router.navigate(['updateemployee',employeeId]);
    }
-   deleteEmployee(id:number) {
-    this.employeeService.deleteEmployee(id).subscribe(data =>{
+   deleteEmployee(employeeId:number) {
+    this.employeeService.deleteEmployee(employeeId).subscribe(data =>{
       console.log(data);
       this.getEmployees();
     })
-   }
+    /* serchtext:string='';
+
+    onsearchtextentred(searchvalue:string){
+      this.serchtext=searchvalue;
+      console.log(this.serchtext);
+    }*/
+   }  
    
 }
 

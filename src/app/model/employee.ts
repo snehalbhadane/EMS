@@ -2,12 +2,15 @@ export class Employee {
 
     employeeId:number;
     employeeName:string;
+    email:string;
+    designation:string;
+    grade:string;
+    resourceType:string;
     doj:Date;
     totalExp:DoubleRange;
-    reportingManager:string;
-    designation:string;
-    email:string;
-    baseLocation:string;
-    poolStatus:string;
+    irm:string;
+    currentLocation:string;
+    currentAllocation:string;
+    project:string;
 
 }

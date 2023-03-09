@@ -1,36 +1,69 @@
 <h3>List Of Employees</h3>
-<table class="table table-striped">
+<div>
+    <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/employeelist']">Back</button>
+
+<!-- <app-search (searchtextchanged)="onsearchtextentred($event)"></app-search>
+  -->
+    <table style="width: 10%;" class="table table-condensed">
     <thead>
         <tr>
-            <th>Employee Id<th>
-            <th>Employee Name<th>
-            <th>Date of Joining</th>
-            <th>Total Experinces</th>
-            <th>Reporting Manager</th>
-            <th>Designation</th>
-            <th>Email Id</th>
-            <th>Base Location</th>
-            <th>Pool Status</th>
+            <th>Employee Id<th><br>
+            <th>Employee Name<th><br>
+            <th>Email Id</th><br>
+            <th>Designation</th><br>
+            <th>Grade</th><br><br>&nbsp;
+            <th>ResourceType</th><br>&nbsp;
+            <th>Joining Date</th><br>
+            <th>Total Experinces</th>&nbsp;&nbsp;
+            <th>Reporting Manager</th><br>
+            <th>Current Location</th><br>
+            <th>CurrentAllocation</th><br><br>
+            <th>Project</th>&nbsp;&nbsp;&nbsp;
             <th>Actions</th>
         </tr>
 
     </thead>
     <tbody>
         <tr *ngFor="let Employee of employees">
-            <td>{{Employee.employeeId}}</td>
-            <td>{{Employee.employeeName}}</td>
-           <td>{{Employee.doj}}</td>
-           <td>{{Employee.totalExp}}</td>
-          <td>{{Employee.reportingManager}}</td>
-          <td>{{Employee.email}}</td>
-           <td>{{Employee.baseLocation}}</td>
-           <td>{{Employee.poolStatus}}</td>
-           <td>
-                <button (click)="updateEmployee(Employee.employeeId)" class="btn btn-info"style="margin-left: 10px;"> Update</button>
-                <button (click)="deleteEmployee(Employee.employeeId)" class="btn btn-danger"style="margin-left: 10px;">Delete</button>
-                <button (click)="employeeDetails(Employee.employeeId)" class="btn btn-info" style="margin-left: 10px;"> View</button>
-            </td>
+            <td style="width: 10%;">{{Employee.employeeId}}</td><br>
+            <td>{{Employee.employeeName}}</td><br>
+            <td>{{Employee.email}}</td><br>
+            <td>{{Employee.designation}}</td><br>
+            <td>{{Employee.grade}}</td><br>
+            <td>{{Employee.resourceType}}</td><br>
+            <td>{{Employee.doj}}</td><br>
+            <td>{{Employee.totalExp}}</td><br>
+            <td>{{Employee.irm}}</td><br>
+            <td>{{Employee.currentLocation}}</td><br>
+            <td>{{Employee.currentAllocation}}</td><br>&nbsp;
+            <td>{{Employee.project}}</td><br><br>
+           <th>
+                <button (click)="employeeDetails(Employee.employeeId)" class="btn btn-primary btn-sm" style="margin-left: 10px;"> View</button><br>
+                <button (click)="updateEmployee(Employee.employeeId)" class="btn btn-info btn-sm"style="margin-left: 10px;"> Edit</button><br>
+                <button (click)="deleteEmployee(Employee.employeeId)" class="btn btn-danger btn-sm"style="margin-left: 10px;,width:10%;">Delete</button><br>
+                
+            </th>
         </tr>
+        <!-- <tr *ngFor="let e of empList">
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empId }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empName }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empSalary }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empAge }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.department.deptName }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.department.deptType }}</td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">
+              <a class="btn btn-success" [routerLink]="['update-employee']" [state]="e">
+                Update
+              </a>
+            </td>
+            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">
+              <a class="btn btn-danger" (click)="deleteEmp(e.empId)">
+                Delete.
+              </a>
+            </td>
+        </tr> -->
+        </tbody>
 
-    </tbody>
+   <!--  </tbody> -->
 </table>
+</div>

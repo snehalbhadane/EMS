@@ -3,35 +3,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './home/homepage/homepage.component';
-import { LoginComponent } from './login/login.component';
-import { LoginSuccessComponent } from './login-success/login-success.component';
-import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import{MatSidenavModule}from'@angular/material/sidenav';
+import{MatIconModule}from'@angular/material/icon';
+import{MatListModule}from'@angular/material/list';
 import { CreateemployeeComponent } from './createemployee/createemployee.component';
 import { EmployeelistComponent } from './employeelist/employeelist.component';
 import { OnboardComponent } from './onboard/onboard.component';
 import { UpdateemployeeComponent } from './updateemployee/updateemployee.component';
 import { DeleteemployeeComponent } from './deleteemployee/deleteemployee.component';
 import { EmployeedetailsComponent } from './employeedetails/employeedetails.component';
+import { SearchComponent } from './search/search.component';
+import { FileuploadComponent } from './fileupload/fileupload.component';
+import { HeaderComponent } from './header/header.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    LoginComponent,
-    LoginSuccessComponent,
-    SignupComponent,
     CreateemployeeComponent,
     EmployeelistComponent,
     OnboardComponent,
     UpdateemployeeComponent,
     DeleteemployeeComponent,
     EmployeedetailsComponent,
+    SearchComponent,
+    FileuploadComponent,
+    HeaderComponent
+    
   
   ],
   imports: [
@@ -42,7 +47,17 @@ import { EmployeedetailsComponent } from './employeedetails/employeedetails.comp
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+   
+  
+    
+    
+    
+  
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,59 +1,58 @@
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-  rel="stylesheet">
-
-
-<!-- Template Main CSS File -->
-<!-- <link href="/.. /assets/vendor/css/style.css" rel="stylesheet">
- -->
 <!-- Navigation Bar start -->
 <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
- <!--  <a class="navbar-brand" routerLink="/register" >Employee Management System</a> -->
-  <h2 style="color: rgb(173, 230, 27);">Employee Management System</h2>
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
-    aria-expanded="true">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div id="navb" class="navbar-collapse collapse hide">
-   
-    <ul class="nav navbar-nav ml-auto">
+    <!--  <a class="navbar-brand" routerLink="/homepage">Employee Management System</a> -->
+    <h2 style="color: rgb(173, 230, 27);">Employee Management System</h2>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
+        aria-expanded="true">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navb" class="navbar-collapse collapse hide">
 
-      <li class="nav-item">
-        <a  class="nav-link" routerLink="/onboard" ><span class="fas fa-user"></span>DashBoard</a> 
-      </li>
-     <li class="nav-item">
-         
-        <a class="nav-link" routerLink="/register"><span class="fas fa-user"></span> Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login"><span class="fas fa-sign-in-alt"></span> Login</a>
-      </li>
+        <ul class="nav navbar-nav ml-auto">
 
-    </ul>
-  </div>
-</nav>
-<!-- Navigation Bar End -->
-<!-- Start of homepage design section -->
-<section id="hero" class="d-flex align-items-center">
-  <div class="container">
-    <h2>Welcome To Home Page</h2>
-    
- 
-  </div>
-
-
- <!--  <div class="row">
-    <div class="col-rg-2">
-      <div class="side-menu-list">
-      <ul>
-        <li>
-          <a  class="nav-link" routerLink="/onboard" ><span class="fas fa-user"></span>DashBoard</a> 
-        </li>
-      </ul>
-      </div>
+            <li class="nav-item">
+                <button class="btn-primary" style="margin-left: 10px;" routerLink="/home">Home</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn-info" style="margin-left: 10px;" routerLink="/onboard">Onboarding</button>
+            </li>
+            
+        </ul>
     </div>
-  </div> -->
-</section><br><br><br><br><br><br><br>
+</nav> 
+<!-- Navigation Bar End -->
+<!-- Start of homepage design section --> 
 
-<!-- End of homepage design section -->
+<!--Angular Material Nav Bar-->
+<!-- <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
+        </button>
+        <h2>Employee Management System</h2>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav opened="true" mode="side">
+        <mat-nav-list>
+            <a mat-list-item> Home</a>
+            <a mat-list-item> Onboard </a>
+            <a mat-list-item> Feedback </a>
+            <a mat-list-item> Report</a>
+            <a mat-list-item> About Us</a>
+            <a mat-list-item> Contact</a>
+        
+        </mat-nav-list>
+    </mat-sidenav >
+    <mat-sidenav-content>
+        <div style="height: 88vh;">
+        <router-outlet></router-outlet></div>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+<div class="bg">
+ 
+</div>
+<router-outlet></router-outlet>

@@ -1,4 +1,14 @@
 h3{
     text-align: center;
     color: rgb(93, 196, 247);
+ 
 }
+
+  table {
+    border: 1px solid rgb(173, 212, 248);
+    border-collapse: collapse;
+    font-size: small;
+  }
+  button{
+    size: 10px;
+  }

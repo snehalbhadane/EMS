@@ -9,15 +9,15 @@ import { EmployeeService } from '../Service/employee.service';
   styleUrls: ['./updateemployee.component.css']
 })
 export class UpdateemployeeComponent implements OnInit {
-  emmployeeId:number;
+  employeeId:number;
   employee:Employee;
  
   constructor(private employeeService:EmployeeService,
     private route:ActivatedRoute,private router:Router){}
   ngOnInit(): void {
     this.employee = new Employee();
-     this.emmployeeId = this.route.snapshot.params['emmployeeId'];
-    this.employeeService.getEmployeeById(this.emmployeeId).subscribe(data=>{
+     this.employeeId = this.route.snapshot.params['emmployeeId'];
+    this.employeeService.getEmployee(this.employeeId).subscribe(data=>{
      this.employee = data; 
     });
   
@@ -28,11 +28,11 @@ export class UpdateemployeeComponent implements OnInit {
     /*  this.employeeService.updateEmployee(this.id,this.employee).subscribe(data =>{
        this.getToEmployeeList(); 
      }
-       ,error=>console.log(error));*/
-     
+       ,error=>console.log(error));
+      */
     }
     updateEmployee() {
-      this.employeeService.updateEmployee(this.emmployeeId, this.employee)
+      this.employeeService.updateEmployee(this.employeeId, this.employee)
         .subscribe(data => {
           console.log(data);
           this.employee = new Employee();
@@ -42,8 +42,8 @@ export class UpdateemployeeComponent implements OnInit {
     gotoList() {
       this.router.navigate(['/employees']);
     }
-    /* getToEmployeeList(){
+     getToEmployeeList(){
       this.router.navigate(['/employees'])
     }
-   */
+   
 }
