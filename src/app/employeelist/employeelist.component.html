@@ -1,10 +1,13 @@
 <h3>List Of Employees</h3>
 <div>
-    <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/employeelist']">Back</button>
-
+ 
+    <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/onboard']">Back</button>
+    <button class="btn-info" style="margin-left: 10px;" [routerLink]="['/excelsheet']">Upload</button>
+ 
 <!-- <app-search (searchtextchanged)="onsearchtextentred($event)"></app-search>
   -->
-    <table style="width: 10%;" class="table table-condensed">
+   <!--  <table style="width: 10%;" class="table table-condensed"> -->
+      <table>
     <thead>
         <tr>
             <th>Employee Id<th><br>
@@ -44,26 +47,7 @@
                 
             </th>
         </tr>
-        <!-- <tr *ngFor="let e of empList">
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empId }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empName }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empSalary }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.empAge }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.department.deptName }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">{{ e.department.deptType }}</td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">
-              <a class="btn btn-success" [routerLink]="['update-employee']" [state]="e">
-                Update
-              </a>
-            </td>
-            <td *ngIf="serchtext == '' || e.department.deptName.toLowerCase().includes(serchtext)">
-              <a class="btn btn-danger" (click)="deleteEmp(e.empId)">
-                Delete.
-              </a>
-            </td>
-        </tr> -->
+       
         </tbody>
-
-   <!--  </tbody> -->
 </table>
 </div>

@@ -20,6 +20,8 @@ import { EmployeedetailsComponent } from './employeedetails/employeedetails.comp
 import { SearchComponent } from './search/search.component';
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { HeaderComponent } from './header/header.component';
+import { AdminComponent } from './admin/admin.component';
+import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
 
 
 
@@ -35,7 +37,9 @@ import { HeaderComponent } from './header/header.component';
     EmployeedetailsComponent,
     SearchComponent,
     FileuploadComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponent,
+    ExcelsheetComponent
     
   
   ],

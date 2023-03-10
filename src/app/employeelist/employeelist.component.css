@@ -12,3 +12,6 @@ h3{
   button{
     size: 10px;
   }
+  .content{
+    padding-right: 0%;
+  }
