@@ -1,0 +1,42 @@
+<div class="container">
+
+<h1>Signup</h1>
+<form #SingupForm="ngForm" (ngSubmit)="signupUser()">
+
+    <small class="text-danger">{{SignupResponse}}</small>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" placeholder="Enter email" name="email"[(ngModel)]="cm1.emailId" required #emailId="ngModel"
+          [class.is-invalid]="emailId.invalid && emailId.touched " >
+          <small class="text-danger"[class.d-none]="emailId.valid || emailId.untouched ">emailId is required </small>
+  <br>
+        </div>
+        <div class="form-group">
+            <label for="userName">UserName:</label>
+            <input type="userName" class="form-control" placeholder="Enter userName" name="userName"[(ngModel)]="cm1.userName" required #userName="ngModel"
+            [class.is-invalid]="userName.invalid && userName.touched " >
+            <small class="text-danger"[class.d-none]="userName.valid || userName.untouched ">userName is required </small>
+          </div>
+          <br>
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+          <input type="password" class="form-control" placeholder="Enter password" autocomplete="on" name="pwd"[(ngModel)]="cm1.password" 
+          required pattern= "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #password="ngModel"
+          [class.is-invalid]="password.invalid && password.touched ">
+          <small class="text-danger"[class.d-none]="password.valid || password.untouched ">password is required </small>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="pwd">Confirm Password:</label>
+            <input type="password" class="form-control" placeholder="Enter Confirm password" autocomplete="on" name="Cnfgpwd"(ngModel)="cm1.password" 
+            required pattern= "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #Cnfgpwd="ngModel"
+            [class.is-invalid]="Cnfgpwd.invalid && Cnfgpwd.touched ">
+            <small class="text-danger"[class.d-none]="(Cnfgpwd.value == password.value) || Cnfgpwd.untouched ">password is required </small>
+          </div>
+          <br>
+        <button type="submit" class="btn btn-success">Signup</button>
+        <!-- <small class="float-right"(click)="loginform()">Existing Compentency Member ? Login here</small> -->
+        <!-- <button mat-raised-button (click)="loginform()">Existing Compentency Member ? Login here</button> -->
+      </form>
+      <button mat-raised-button (click)="loginform()">Existing Compentency Member ? Login here</button>
+    </div>

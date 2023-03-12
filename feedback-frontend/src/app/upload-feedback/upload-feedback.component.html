@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-3 leftside">
+      <a href="">
+        <img src="assets/yash-logo.png" class="image1 img-fluid" alt="cars" />
+      </a>
+  
+      <hr style="color: white" />
+      <nav class="main-menu" role="navigation">
+        <ul class="main-menu">
+          <div class="main-menu1">
+            <li class="nav1"><a routerLink="/dashboard" >Dashboard</a></li>
+            <br />
+          </div>
+          <div class="main-menu2">
+            <li class="nav1"><a routerLink="/feedback-list" class="nav2">Feedback list</a></li>
+            <br />
+          </div>
+          <div class="main-menu3">
+            <li class="nav1"><a  class="nav2"> Feedback-upload</a></li>
+            <br />
+          </div>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-9 block ">
+    <div class="block">
+    </div>
+    
+    <h1 style="color: red; text-align: center;"><b><u>upload-feedback</u></b></h1>
+
+    <button type="button " class="btn btn-success " style ="margin-left: 80%;">Download Template</button>
+  
+    <div class="content">
+       <form  style="border: 2px solid black; padding: 20px; margin-top: 20px;">
+        
+          <input (change)="selectfile($event)" type="file"/>
+          <button (click)="uploadFile()" class="btn btn-primary">Upload</button>
+       </form>
+      
+    </div>
+  
+  
+  
+  </div>
+  
+  </div>
+ 
+ 
+ 
+ 
+ 
+ 

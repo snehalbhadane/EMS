@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.yash.ems.config.LoggerConfiguration;
+import com.yash.ems.entity.Employee;
 import com.yash.ems.entity.EmployeeFeedback;
+import com.yash.ems.entity.Skill;
 import com.yash.ems.entity.User;
 import com.yash.ems.service.FeedbackService;
 
@@ -33,6 +36,7 @@ import io.swagger.annotations.ApiOperation;
 //@Api(tags = "EmployeeFeedbackController", description = "For Testing")
 @RestController
 @RequestMapping("/feedback/api")
+@CrossOrigin("*")
 public class EmployeeFeedbackController {
 	
 	private Logger logger = LoggerConfiguration.getLogger(EmployeeFeedbackController.class);
@@ -40,10 +44,33 @@ public class EmployeeFeedbackController {
 	@Autowired
 	private FeedbackService feedbackService;
 	
+	@ApiOperation(value = "fetch all employee.")
+	@GetMapping("/allEmployee")
+    public List<Employee> getAllEmployee() {
+		
+		String methodName = "getAllEmployee()";
+		logger.info(methodName + " called"); 
+
+		return feedbackService.getEmployees();
+    }
+	
+	@ApiOperation(value = "fetch all skill.")
+	@GetMapping("/allSkill")
+    public List<Skill> getAllSkill() {
+		
+		String methodName = "getAllSkill()";
+		logger.info(methodName + " called"); 
+
+		return feedbackService.getSkills();
+    }
+	
 	@ApiOperation(value = "fetch all employee feedback.")
 	@GetMapping("/allEmployeeFeedback")
     public List<EmployeeFeedback> getAllEmployeeFedback() {
 
+		String methodName = "getAllEmployeeFedback()";
+		logger.info(methodName + " called"); 
+		
 		return feedbackService.getAllEmployeeFedback();
     }
 	

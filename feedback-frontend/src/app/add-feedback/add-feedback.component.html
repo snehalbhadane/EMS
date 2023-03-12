@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-3 leftside">
+    <a href="">
+      <img src="assets/yash-logo.png" class="image1 img-fluid" alt="cars" />
+    </a>
+    <hr style="color: white" />
+    <nav class="main-menu" role="navigation">
+      <app-menu></app-menu>
+    </nav>
+  </div>
+  <div class="col-9 block ">
+    <div class="block"></div>
+    <div id="page_content">
+      <div id="page_content_inner">
+        <div class="uk-width-medium-3-10 float-left">
+          <h3 class="heading_b uk-margin-bottom" style="font-weight: 500;">Add Employee Feedback</h3>
+        </div>
+        <div class="uk-width-medium-7-10 float-right" style="text-align:right;">
+          <a routerLink="/feedback-list" class="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon">
+            Back
+          </a>
+        </div>
+        <div>
+          
+          
+          <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" autoComplete="off">
+          
+            <div class="form-group">
+              <label for="email">Employee:</label>
+              <select #employee id="employee" formControlName="employee" class="form-control">
+                <option value="">Please Select</option>
+                <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}}</option>
+              </select>
+            </div>
+            <br> 
+            <div class="form-group">
+              <label for="userName">Overall Experience (In Years):</label>
+              <select #overallExperience id="overallExperience" formControlName="overallExperience" class="form-control">
+                <option value="">Please Select</option>
+                <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+              </select>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="pwd">Project Experience:</label>
+              <select #projectExperience id="projectExperience" formControlName="projectExperience" class="form-control">
+              <option value="">Please Select</option>
+              <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+            </select>
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="pwd">Confirm Password:</label>
+              <input type="text" class="form-control" />
+              <!-- <input type="password" class="form-control" placeholder="Enter Confirm password" autocomplete="on" name="Cnfgpwd"
+                (ngModel)="cm1.password" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #Cnfgpwd="ngModel"
+                [class.is-invalid]="Cnfgpwd.invalid && Cnfgpwd.touched ">
+              <small class="text-danger" [class.d-none]="(Cnfgpwd.value == password.value) || Cnfgpwd.untouched ">password is
+                required </small> -->
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Submit</button>
+            <!-- <small class="float-right"(click)="loginform()">Existing Compentency Member ? Login here</small> -->
+            <!-- <button mat-raised-button (click)="loginform()">Existing Compentency Member ? Login here</button> -->
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

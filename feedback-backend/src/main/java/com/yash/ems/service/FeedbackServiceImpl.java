@@ -56,6 +56,24 @@ public class FeedbackServiceImpl implements FeedbackService {
 	
 	@Autowired
 	private EmployeeFeedbackFileRepository employeeFeedbackFileRepository; 
+	
+	@Override
+	public List<Skill> getSkills() {
+		
+		String methodName = "getSkills()";
+		logger.info(methodName + " called"); 
+		
+		return skillRepository.findAll();
+	}
+	
+	@Override
+	public List<Employee> getEmployees() {
+		
+		String methodName = "getEmployees()";
+		logger.info(methodName + " called"); 
+		
+		return employeeRepository.findAll();
+	}
 
 	@Override
 	public List<EmployeeFeedback> getAllEmployeeFedback() {
@@ -366,7 +384,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		headerRow.createCell(cellCount).setCellValue("Suggestion");
 		headerRow.getCell(cellCount++).setCellStyle(style);
 	
-		autoSizeColumns(sheet, 15);
+		autoSizeColumns(sheet, cellCount);
 		
 		return workbook;
 	}

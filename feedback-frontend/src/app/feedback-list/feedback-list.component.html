@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-3 leftside">
+    <a href="">
+      <img src="assets/yash-logo.png" class="image1 img-fluid" alt="cars" />
+    </a>
+    <hr style="color: white" />
+    <nav class="main-menu" role="navigation">
+      <app-menu></app-menu>
+    </nav>
+  </div>
+  <div class="col-9 block ">
+    <div class="block"></div>
+    <div id="page_content">
+      <div id="page_content_inner">
+        <div class="uk-width-medium-3-10 float-left">
+          <h3 class="heading_b uk-margin-bottom" style="font-weight: 500;">Feedback List</h3>
+        </div>
+        <div class="uk-width-medium-7-10 float-right" style="text-align:right;">
+          <a routerLink="/add-feedback" class="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon">
+            Add Feedback
+          </a>
+        </div>
+        <div>
+          <table id="employeeFeedbackTableId">
+            <thead>
+              <tr>
+                <th>Sno</th>
+                <th>Emp Code</th>
+                <th>Emp Name</th>
+                <th>Total Exp</th>
+                <th>Project Exp</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of employeeFeedbacks let i=index">
+                <td style="text-align:left;">{{i+1}}</td>
+                <td>{{e.employee.code}}</td>
+                <td>{{e.employee.name}}</td>
+                <td>{{e.overallExperience}} Years</td>
+                <td>{{e.projectExperience}} Years</td>
+                <td></td>
+              </tr> 
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
