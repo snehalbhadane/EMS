@@ -1,8 +1,22 @@
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ant-path-matcher
+server:
+  port: 7071
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
 #  sql:
 #    init:
 #      mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:file:~/h2/EMS2
+    username: sa
+    password: ''
+    driverClassName: org.h2.Driver
+
 
 
