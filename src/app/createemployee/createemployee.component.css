@@ -1,12 +1,12 @@
 h3{
     text-align: center;
-    color:  rgb(93, 196, 247);
-    background-color: rgb(184, 249, 156);
+    color:  rgb(17, 152, 219);
     width: 100%;
 }
-.form{
+/* .form{
     text-align: center;
-}
+} */
+
 .button{
-    padding-left: 50px;
+    padding-left: 30px;
 }

@@ -1,13 +1,15 @@
-<h3>List Of Employees</h3>
+<h2>List Of Employees</h2>
 <div>
  
     <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/onboard']">Back</button>
     <button class="btn-info" style="margin-left: 10px;" [routerLink]="['/excelsheet']">Upload</button>
- 
+    <button class="btn-success" style="margin-left: 10px;" [routerLink]="['/download']">Download</button>
+    
+   
 <!-- <app-search (searchtextchanged)="onsearchtextentred($event)"></app-search>
   -->
-   <!--  <table style="width: 10%;" class="table table-condensed"> -->
-      <table>
+    <table class="table">
+  
     <thead>
         <tr>
             <th>Employee Id<th><br>
@@ -15,12 +17,12 @@
             <th>Email Id</th><br>
             <th>Designation</th><br>
             <th>Grade</th><br><br>&nbsp;
-            <th>ResourceType</th><br>&nbsp;
+            <th>Resource Type</th><br>&nbsp;
             <th>Joining Date</th><br>
             <th>Total Experinces</th>&nbsp;&nbsp;
             <th>Reporting Manager</th><br>
             <th>Current Location</th><br>
-            <th>CurrentAllocation</th><br><br>
+            <th>Current Allocation</th><br><br>
             <th>Project</th>&nbsp;&nbsp;&nbsp;
             <th>Actions</th>
         </tr>

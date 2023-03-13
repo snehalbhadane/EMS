@@ -1,12 +1,9 @@
-h2{
-    color: rgb(20, 218, 99);
-    text-align: center;
-}
+
 .bg {
     /* The image used */
     background-image: url("https://inspireacademy.in/wp-content/uploads/2020/08/employee-onboarding.png");
     /* Full height */
-    height: 620px;
+    height: 550px;
      /* Center and scale the image nicely */
      background-position: center;
     background-repeat: no-repeat;

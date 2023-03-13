@@ -1,21 +1,53 @@
 
+<!-- Navigation Bar End -->
+<!-- Start of homepage design section --> 
+
+<!--Angular Material Nav Bar-->
+ <!-- <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button>
+            <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
+        </button>
+        <h2>Employee Management System</h2>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav opened="true" mode="side">
+        <mat-nav-list>
+            <a mat-list-item> Home</a>
+            <a mat-list-item> Onboard Module</a>
+            <a mat-list-item> Feedback Module</a>
+            <a mat-list-item> Report Module</a>
+            <a mat-list-item> About Us</a>
+            <a mat-list-item> ContactUs</a>
+        
+        </mat-nav-list>
+    </mat-sidenav >
+    <mat-sidenav-content>
+        <div style="height: 88vh;">
+        <router-outlet></router-outlet></div>
+    </mat-sidenav-content>
+</mat-sidenav-container> 
+
+ -->
 <div class="bg">
     <!-- <h1>Welcome to Admin</h1> -->
-    <ul>
+    <ol>
     <!-- <li class="nav-item">
         <button class="btn-info" style="margin-left: 10px;" routerLink="/onboard">Admin</button>
       </li> -->
+      <li class="nav-item">
+        <button class="btn-secondary" style="margin-left: 10px;" routerLink="/home">Home</button>
+      </li>
 <li class="nav-item">
     <button class="btn-info" style="margin-left: 10px;" routerLink="/employeelist">Employee List</button>
   </li>
   <li class="nav-item">
     <button class="btn-success" style="margin-left: 10px;" routerLink="/createemployee">Add Employee</button>
   </li>
-  <li class="nav-item">
-    <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/onboard']">Back</button>
-    
-  </li>
-</ul>
+ 
+</ol>
 
    
   </div>

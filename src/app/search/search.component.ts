@@ -7,26 +7,25 @@ import { Employee } from '../model/employee';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-onsearchtextchanged() {
-}
+
   emplist:Employee[];
-enteredsearchvalue: any;
+
   constructor(){}
   ngOnInit(): void {
     
   }
 
- /*  enteredsearchvalue:string='';
+   enteredsearchvalue:string='';
   @Output()
-  searchtextchanged:EventEmitter<string> = new EventEmitter<string>;
+  searchtextchanged:EventEmitter<string> = new EventEmitter<string>();
   
-  onsearchtextchanged(){
+  onSearchTextChanged(){
 this.searchtextchanged.emit(this.enteredsearchvalue);
 
-  } */
-
+  } 
+ 
 }
-
+ 
 
 
 

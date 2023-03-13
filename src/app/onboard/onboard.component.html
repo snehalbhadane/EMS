@@ -13,10 +13,7 @@
       <!-- <li class="nav-item">
         <button class="btn-primary" style="margin-left: 10px;" routerLink="/home">Home</button>
       </li> -->
-      <li class="nav-item">
-        <button class="btn-primary" style="margin-left: 10px;" routerLink="/admin">Admin</button>
-      </li>
-      
+     
       <li class="nav-item">
         <button class="btn-info" style="margin-left: 10px;" routerLink="/employeelist">Employee List</button>
       </li>
@@ -25,7 +22,7 @@
       </li>
       
       <li class="nav-item">
-        <button class="btn-info" style="margin-left: 10px;" [routerLink]="['/home']">Back</button>
+        <button class="btn-primary" style="margin-left: 10px;" [routerLink]="['/home']">Back</button>
         
       </li>
       
@@ -47,6 +44,9 @@
 <!-- Start of homepage design section -->
 
 <div class="bg">
-  <h2> Welcome to Onboarding</h2>
+  <h1 > Welcome Onboarding</h1>
+  <style>h1{text-align: center;
+  color: rgb(13, 237, 35);
+  }</style>
 </div>
 <router-outlet></router-outlet>

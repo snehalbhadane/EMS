@@ -1,0 +1,20 @@
+
+<div class="container">
+    <div * ngFor="let content of content">
+        <span>{{content.employeeId}}</span>
+        <span>{{content.employeeName}}</span>
+        <span>{{content.email}}</span>
+        <span>{{content.designation}}</span>
+        <span>{{content.grade}}</span>
+        <span>{{content.resourceType}}</span>
+        <span>{{content.doj}}</span>
+        <span>{{content.totalExp}}</span>
+        <span>{{content.irm}}</span>
+        <span>{{content.currentLocation}}</span>
+        <span>{{content.currentAllocation}}</span>
+        <span>{{content.project}}</span>
+
+    </div>
+ <!--    <button class="button" class="save" (click)="file">Download</button> -->
+    <button class="pull-right" title="Excel Download" (click)="exportAsXLSX()">Download</button>
+</div>

@@ -25,6 +25,7 @@ import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,7 @@ import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
     FileuploadComponent,
     HeaderComponent,
     AdminComponent,
-    ExcelsheetComponent
+    ExcelsheetComponent,
     
   
   ],
@@ -55,6 +56,7 @@ import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+  
    
   
     

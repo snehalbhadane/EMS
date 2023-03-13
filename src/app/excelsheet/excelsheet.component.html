@@ -1,7 +1,7 @@
-
-
-
+<div class="file" >
+<!-- <input type="file" (change)="onFileChange($event)" multiple="false"/> -->
 <input type="file" (change)="onFileChange($event)" multiple="false"/>
+
 <table>
      <tbody>
         <tr *ngFor="let row of data">
@@ -12,4 +12,7 @@
 
         </tr>
      </tbody>
+     
 </table>
+<!-- <button class="pull-right" title="Excel Download" (click)="exportAsXLSX()">Download</button>  -->
+</div>

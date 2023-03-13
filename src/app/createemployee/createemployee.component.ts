@@ -1,12 +1,14 @@
-import { Location } from '@angular/common';
+import { JsonPipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from '../model/employee';
 import { EmployeeService } from '../Service/employee.service';
 
+
 @Component({
   selector: 'app-createemployee',
   templateUrl: './createemployee.component.html',
+
   styleUrls: ['./createemployee.component.css']
  
 

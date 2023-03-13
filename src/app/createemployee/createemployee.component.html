@@ -1,7 +1,7 @@
-<h3>Onboarding Employee</h3><br>
+<h3>Onboarding Employee</h3>
 <button class="btn-primary" style="margin-left: 20px;" [routerLink]="['/onboard']">Back</button>
 
-<div>
+<div class="form" >
   
     <form (ngSubmit)="onSubmit()">
   
@@ -15,10 +15,10 @@
           
 
        <div class="col-md-6">
-        <label for="userName">Employee Name:</label>
-        <input type="userName" class="form-control" placeholder="Enter Name" name="userName"[(ngModel)]="employee.employeeName" required #employeeName="ngModel"
+        <label for="employeeName">Employee Name:</label>
+        <input type="employeeName" class="form-control" placeholder="Enter Name" name="employeeName"[(ngModel)]="employee.employeeName" required #employeeName="ngModel"
         [class.is-invalid]="employeeName.invalid && employeeName.touched " >
-        <small class="text-danger"[class.d-none]="employeeName.valid || employeeName.untouched ">userName is required </small>
+        <small class="text-danger"[class.d-none]="employeeName.valid || employeeName.untouched ">Employee Name is required </small>
       </div>
 
       <div class="col-md-6">
@@ -39,7 +39,7 @@
         <label for="grade">Grade:</label>
         <select class="form-control" placeholder="Enter grade" name="grade"[(ngModel)]="employee.grade" required #grade="ngModel"
         [class.is-invalid]="grade.invalid && grade.touched " >
-        <small class="text-danger"[class.d-none]="grade.valid || grade.untouched ">Gradeis required </small>
+        <small class="text-danger"[class.d-none]="grade.valid || grade.untouched ">Grade is required </small>
         <option>B.Tech</option>
         <option>M.Tech</option>
         <option>Degree</option>
@@ -53,12 +53,18 @@
         <small class="text-danger"[class.d-none]="resourceType.valid || resourceType.untouched ">Gradeis required </small>
       </div>
 
-      <div class="col-md-6">
+       <div class="col-md-6">
         <label for="doj">Joining Date:</label>
         <input type="userName" class="form-control" placeholder="Enter date" name="doj"[(ngModel)]="employee.doj" required #doj="ngModel"
         [class.is-invalid]="doj.invalid && employeeId.touched " >
         <small class="text-danger"[class.d-none]="doj.valid || doj.untouched ">Date of joiing is required </small>
-      </div> 
+      </div>  
+       <!--   <input
+            class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
+            ngbDatepicker  #d="ngbDatepicker"/>
+          <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+        </div> 
+    -->
       
       <div class="col-md-6">
         <label for="totalExp">Total Experinces:</label>
@@ -102,9 +108,13 @@
       <option>BNY Project</option> 
       <option>Internal Traning</option> 
       </select></div><br><br>
+   
+
       <div class="button"> 
-      <button class="btn btn-success" type="submit"> Submit</button>
+      <button class="btn btn-success" type="submit" > Submit</button>
     </div>
-  
-    </form> 
-</div>
+  </form> 
+  <router-outlet></router-outlet>
+  </div>
+
+

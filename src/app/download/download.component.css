@@ -1,0 +1,14 @@
+span{
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 30px;
+}
+.save{
+    padding: 8px,14px;
+    border: 1px;
+    outline: none;
+    font-size: 20px;
+    margin-top: 20px;
+    color: #fff;
+    background-color: rgb(151, 240, 178);
+}

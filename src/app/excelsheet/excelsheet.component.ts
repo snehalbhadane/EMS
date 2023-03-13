@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 
+
 @Component({
   selector: 'app-excelsheet',
   templateUrl: './excelsheet.component.html',
   styleUrls: ['./excelsheet.component.css']
 })
 export class ExcelsheetComponent implements OnInit {
+exportAsXLSX() {
+throw new Error('Method not implemented.');
+}
 
   data:[][];
+  excelsheetService: any;
+  
   constructor(){}
   ngOnInit(): void {
     
@@ -37,6 +43,17 @@ export class ExcelsheetComponent implements OnInit {
   reader.readAsBinaryString(target.files[0]);
 
   }
-   
 
+ /*  data:any[{ }] 
+  // calling the method
+  exportAsXLSX():void{
+   this.excelsheetService.exportAsExcelFile(this.data,'sample');
+  }
+*/
+ 
 }
+
+
+ 
+
+
