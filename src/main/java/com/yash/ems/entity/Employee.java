@@ -1,14 +1,10 @@
 package com.yash.ems.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,15 +24,20 @@ public class Employee {
 	@Column(name="experience")
 	private String experience;
 	
-//	@OneToMany
-//	private List<Skill> skills=new ArrayList<>();
+	
+	
 
-//	public List<Skill> getSkills() {
-//		return skills;
-//	}
-//	public void setSkills(List<Skill> skills) {
-//		this.skills = skills;
-//	}
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Employee(int id, String name, String code, String experience) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.experience = experience;
+	}
 	public int getId() {
 		return id;
 	}

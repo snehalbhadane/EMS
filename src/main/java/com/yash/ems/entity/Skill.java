@@ -18,6 +18,19 @@ public class Skill {
 	@Column(name="name")
 	private String name;
 	
+	
+	
+	
+	
+	public Skill() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Skill(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 	public int getId() {
 		return id;
 	}

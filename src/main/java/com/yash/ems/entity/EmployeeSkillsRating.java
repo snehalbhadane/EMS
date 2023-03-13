@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="employee_skills_rating")
 public class EmployeeSkillsRating {
@@ -24,13 +27,34 @@ public class EmployeeSkillsRating {
 	@Column(name="remarks")
 	private String remarks;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="employee_feedback_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_feedback_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+	@JsonBackReference
 	private EmployeeFeedback employeeFeedback;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="skill_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "skill_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private Skill skill;
+	
+	
 
+	public EmployeeSkillsRating() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public EmployeeSkillsRating(int id, int rating, String remarks, Skill skill) {
+	super();
+	this.id = id;
+	this.rating = rating;
+	this.remarks = remarks;
+	this.employeeFeedback = employeeFeedback;
+	this.skill = skill;
+}
 	public int getId() {
 		return id;
 	}

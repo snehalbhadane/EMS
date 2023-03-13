@@ -1,5 +1,7 @@
 package com.yash.ems.entity;
 
+import java.io.Serializable;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,18 +17,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="employee_feedback")
-public class EmployeeFeedback {
+public class EmployeeFeedback implements Serializable{
+
+	private static final long serialVersionUID = -5920333604782942132L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="employee_id")
-	private Employee employee;
 	
 	@Column(name="overall_experience")
 	private int overallExperience;
@@ -44,21 +46,50 @@ public class EmployeeFeedback {
 	private LocalDateTime createdOn;
 	
 
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
+	private Employee employee;
 	
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="file_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "file_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private EmployeeFeedbackFile employeeFeedbackFile;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="created_by_id")
+
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "created_by_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
 	private User createdBy;
 	
-	@OneToMany(targetEntity = EmployeeSkillsRating.class, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@OneToMany(targetEntity = EmployeeSkillsRating.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_feedback_id", referencedColumnName = "id")
 	private List<EmployeeSkillsRating> employeeSkillsRatings;
+	
+	
+	
 
+	public EmployeeFeedback() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public EmployeeFeedback(int id, int overallExperience, int projectExperience, String comments, String suggestion,
+			LocalDateTime createdOn, Employee employee, EmployeeFeedbackFile employeeFeedbackFile, User createdBy,
+			List<EmployeeSkillsRating> employeeSkillsRatings) {
+		super();
+		this.id = id;
+		this.overallExperience = overallExperience;
+		this.projectExperience = projectExperience;
+		this.comments = comments;
+		this.suggestion = suggestion;
+		this.createdOn = createdOn;
+		this.employee = employee;
+		this.employeeFeedbackFile = employeeFeedbackFile;
+		this.createdBy = createdBy;
+		this.employeeSkillsRatings = employeeSkillsRatings;
+	}
 	public int getId() {
 		return id;
 	}

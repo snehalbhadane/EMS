@@ -26,7 +26,24 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	
+	
+	
+	
 
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(int id, String name, String email, String code, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.code = code;
+		this.password = password;
+	}
 	public int getId() {
 		return id;
 	}
