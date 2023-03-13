@@ -3,46 +3,63 @@
       <a href="">
         <img src="assets/yash-logo.png" class="image1 img-fluid" alt="cars" />
       </a>
-  
       <hr style="color: white" />
       <nav class="main-menu" role="navigation">
-        <ul class="main-menu">
-          <div class="main-menu1">
-            <li class="nav1"><a routerLink="/dashboard" >Dashboard</a></li>
-            <br />
-          </div>
-          <div class="main-menu2">
-            <li class="nav1"><a routerLink="/feedback-list" class="nav2">Feedback list</a></li>
-            <br />
-          </div>
-          <div class="main-menu3">
-            <li class="nav1"><a  class="nav2"> Feedback-upload</a></li>
-            <br />
-          </div>
-        </ul>
+        <app-menu></app-menu>
       </nav>
     </div>
     <div class="col-9 block ">
-    <div class="block">
-    </div>
-    
-    <h1 style="color: red; text-align: center;"><b><u>upload-feedback</u></b></h1>
-
-    <button type="button " class="btn btn-success " style ="margin-left: 80%;">Download Template</button>
-  
-    <div class="content">
-       <form  style="border: 2px solid black; padding: 20px; margin-top: 20px;">
-        
-          <input (change)="selectfile($event)" type="file"/>
-          <button (click)="uploadFile()" class="btn btn-primary">Upload</button>
-       </form>
-      
-    </div>
-  
-  
-  
-  </div>
-  
+      <div class="block"></div>
+      <div id="page_content">
+        <div id="page_content_inner">
+          <div class="uk-width-medium-3-10 float-left">
+            <h3 class="heading_b uk-margin-bottom" style="font-weight: 500;">Upload Employee Feedback Data</h3>
+          </div>
+          <div class="uk-width-medium-7-10 float-right" style="text-align:right;">
+            <a routerLink="#" (click)="downloadEmployeeFeedbackTemplate()" class="md-btn md-btn-primary md-btn-small md-btn-wave-light md-btn-icon">
+              Download Template
+            </a>
+          </div>
+          <div>
+            <form [formGroup]="employeeFeedbackForm" (ngSubmit)="onSubmit()" autoComplete="off">
+              <div class="form-group">
+                <label for="email">Feedback File:</label>
+                <input type="file" class="form-control" required id="name" formControlName="employeeFeedbackFile" (change)="employeeFeedbackFileInput($event)" accept=".xlsx"/>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+          </div>
+          <br>
+          <div *ngIf="errorType">
+            <div *ngIf="errorList.length  > 0;">
+                <div class="form-group">
+                  <div class="uk-width-medium-3-10 float-left">
+                    <h3 class="heading_b uk-margin-bottom" style="font-weight: 500;">Error List</h3>
+                  </div>
+                  <table style="width:100%; margin-top: 20px;">
+                    <thead>
+                      <tr>
+                        <th>Sno</th>
+                        <th>Error</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let e of errorList let i=index">
+                        <td style="text-align:left;">{{i+1}}</td>
+                        <td>{{e}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <div *ngIf="errorList.length  == 0;">
+              <h1>Data uploaded successfully...</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
   </div>
  
  

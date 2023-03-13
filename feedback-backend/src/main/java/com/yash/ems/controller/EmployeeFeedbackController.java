@@ -81,26 +81,15 @@ public class EmployeeFeedbackController {
 		
 		String methodName = "savEmployeeFeedback()";
 		logger.info(methodName + " called"); 
-		
-		EmployeeFeedback EmployeeFeedback = feedbackService.saveEmployeeFeedback(employeeFeedback);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(EmployeeFeedback);
+		EmployeeFeedback ef = feedbackService.saveEmployeeFeedback(employeeFeedback);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(ef);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@ApiOperation(value = "upload employee feedback data")
 	@PostMapping("/upload-employee-feedback")
-/*	public ResponseEntity<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)throws SQLException, IOException {
-		
-		String methodName = "uploadEmployeeFeedback()";
-		logger.info(methodName + " called");
-		
-		User createdBy = new User();
-		createdBy.setId(1);
-		
-		return (ResponseEntity<String>) feedbackService.uploadEmployeeFeedback(file, createdBy);
-	} */
-	
 	public List<String> uploadEmployeeFeedback(@RequestParam("file") MultipartFile file)
 			throws JsonParseException, JsonMappingException, IOException,
 			SQLException  {

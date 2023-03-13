@@ -21,9 +21,7 @@
           </a>
         </div>
         <div>
-          
-          
-          <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" autoComplete="off">
+        <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" autoComplete="off">
           
             <div class="form-group">
               <label for="email">Employee:</label>
@@ -50,20 +48,45 @@
             </div>
             <br>
             <div class="form-group">
-              <label for="pwd">Confirm Password:</label>
-              <input type="text" class="form-control" />
-              <!-- <input type="password" class="form-control" placeholder="Enter Confirm password" autocomplete="on" name="Cnfgpwd"
-                (ngModel)="cm1.password" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #Cnfgpwd="ngModel"
-                [class.is-invalid]="Cnfgpwd.invalid && Cnfgpwd.touched ">
-              <small class="text-danger" [class.d-none]="(Cnfgpwd.value == password.value) || Cnfgpwd.untouched ">password is
-                required </small> -->
+                <div class="uk-width-medium-3-10 float-left">
+                  <h3 class="heading_b uk-margin-bottom" style="font-weight: 500;">Skill Rating</h3>
+                </div>
+              <table style="width:100%; margin-top: 20px;">
+                <thead>
+                  <tr>
+                    <th>Sno</th>
+                    <th>Skill</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of skills let i=index">
+                    <td style="text-align:left;">{{i+1}}</td>
+                    <td>{{s.name}}</td>
+                    <td>
+                      <input type="text" class="form-control" name="ratingInput" (change)="ratingInputCount($event)">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" name="commentInput" (change)="commentInputCount($event)">
+                    </td>
+                  </tr>
+                </tbody>
+               </table> 
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="pwd">Comments:</label>
+              <input type="text" class="form-control" formControlName="comments">
+            </div>
+            <br>
+            <div class="form-group">
+              <label for="pwd">Suggestion:</label>
+              <input type="text" class="form-control" formControlName="suggestion">
             </div>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
-            <!-- <small class="float-right"(click)="loginform()">Existing Compentency Member ? Login here</small> -->
-            <!-- <button mat-raised-button (click)="loginform()">Existing Compentency Member ? Login here</button> -->
           </form>
-
         </div>
       </div>
     </div>

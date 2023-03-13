@@ -3,8 +3,8 @@ import { Skill } from "./skill";
 
 export class EmployeeSkillsRating {
     id !: number;
-    rating !: number;
-    remarks !: string;
+    rating !: any;
+    remarks !: any;
     skill !: Skill;
     employeeFeedback !: EmployeeFeedback;
 }

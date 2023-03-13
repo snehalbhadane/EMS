@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
 
     constructor(private http: HttpClient) { }
@@ -12,7 +14,18 @@ export class ApiService {
     }
 
     post(url: string, data: string) : any {
-        alert(environment.apiURL + url +" : "+ data)
-        return this.http.post(environment.apiURL + url, data)
+        return this.http.post(environment.apiURL + url, data, this.createHeader('application/json')).toPromise();
+    }
+
+    postData(url: string, data: string) : any {
+        return this.http.post(environment.apiURL + url, data);
+    }
+
+    getFile(url: string) : any {
+        return this.http.get(environment.apiURL + url, {responseType : 'blob'})
+    }
+
+    private createHeader(contentType: string): any {
+        return { headers: new HttpHeaders({ 'Content-Type': contentType }) };
     }
 }

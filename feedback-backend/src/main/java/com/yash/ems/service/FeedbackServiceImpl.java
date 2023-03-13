@@ -169,8 +169,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 										if(employee != null && employee.getId() > 0)
 											ef.setEmployee(employee);
 										else {
-											errorList.add("Insert correct employe name in cell - " + CellReference.convertNumToColString(j-1)+""+(inputRow.getRowNum()+1));
-											errorList.add("Insert correct employee code in cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1));
+											errorList.add("Enter valid employee name in cell - " + CellReference.convertNumToColString(j-1)+""+(inputRow.getRowNum()+1));
+											errorList.add("Enter valid employee code in cell - " + CellReference.convertNumToColString(j)+""+(inputRow.getRowNum()+1));
 										}	
 									}
 								}

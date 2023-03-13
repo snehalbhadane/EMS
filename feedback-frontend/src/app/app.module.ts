@@ -11,7 +11,6 @@ import { LoginSucessComponent } from './login-sucess/login-sucess.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { FeedbackFileUploadComponent } from './feedback-file-upload/feedback-file-upload.component';
 
 import { FeedbackListComponent } from './feedback-list/feedback-list.component';
 import { AddFeedbackComponent } from './add-feedback/add-feedback.component';
@@ -29,8 +28,7 @@ import { EmployeeFeedbackService } from './service/employeeFeedbackService';
     LoginComponent,
     SignupComponent,
     LoginSucessComponent,
-    FeedbackFileUploadComponent,
-   
+    
     FeedbackListComponent,
     AddFeedbackComponent,
  
@@ -57,6 +55,6 @@ import { EmployeeFeedbackService } from './service/employeeFeedbackService';
     EmployeeFeedbackService
 
   ],
-  bootstrap: [AppComponent,FeedbackFileUploadComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

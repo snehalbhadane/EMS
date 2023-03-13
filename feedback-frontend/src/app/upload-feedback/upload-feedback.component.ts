@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EmployeeFeedback } from './../model/employeeFeedback';
 import { Component, OnInit } from '@angular/core';
+import { EmployeeFeedbackService } from '../service/employeeFeedbackService';
 
 @Component({
   selector: 'app-upload-feedback',
@@ -8,44 +11,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadFeedbackComponent implements OnInit {
 
+  constructor(private service : EmployeeFeedbackService, private fb : FormBuilder,
+     private router : Router) { }
 
-
-  UploadfeedbackURL="http://localhost:8080/poc_feedback/feedback/api/saveEmployeeFeedback"
-  constructor(
-    private _http:HttpClient
-  ) { }
-
-
-  
+  employeeFeedbackForm !: FormGroup;
+  employeeFeedbackFile !: File;
+  invalidFile = false;
+  errorType = false;
+  errorList !: String[];
 
   ngOnInit(): void {
+    this.employeeFeedbackForm = this.fb.group({
+      employeeFeedbackFile: ['', Validators.required]
+    })
   }
 
-  file:any;
+  downloadEmployeeFeedbackTemplate() {
+    
+    let fileName = "employee-feedback-template.xlsx"
 
-
-  selectfile(event: any){
-    // console.log(event);
-    this.file = event.target.files[0];
-    console.log(this.file);
-
-  }
-
-  uploadFile(){
-    let formdata=new FormData()
-    formdata.append("file", this.file);
-
-    this._http.post(this.UploadfeedbackURL,formdata).subscribe(
-      data=>{
-        //sucess
-         alert("file is uploaded")
-        console.log(data);
-
-      },
-      (error)=>{
-        //error
-        console.log(error);
+    this.service.downloadEmployeeFeedbackTemplate().subscribe((response: any) => {
+      if(response) {
+        var blob = new Blob([response], {type: "application/octet-stream"});
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = fileName;
+        a.click();
       }
-    )
 
-}}
+    });
+  }
+
+  employeeFeedbackFileInput(event: any) {
+
+    if(event.target.files.length == 0) {
+      this.invalidFile = false;
+      return;
+    }
+
+    let fileExtension = event.target.files.item(0)?.name.split(".").pop();
+    
+    if(event.target.files.length > 0 && fileExtension === "xlsx") {
+      this.employeeFeedbackFile = event.target.files[0];
+      this.invalidFile = false;
+    }
+    else {
+      this.invalidFile = true;
+    }
+  }
+
+  onSubmit() {
+    let formData = new FormData();
+    
+    formData.append("file", this.employeeFeedbackFile);
+
+    this.service.uploadEmployeeFeedback(formData).subscribe((data : String[]) => {
+      this.errorList = data;
+      this.errorType = true;
+      this.router.navigate(['/upload-feedback'])
+    })
+ }
+}
