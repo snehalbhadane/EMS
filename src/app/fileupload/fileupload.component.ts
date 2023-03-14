@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { fileupload } from '../model/fileupload';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { Subscription, finalize } from 'rxjs';
+
 
 @Component({
   selector: 'app-fileupload',
@@ -8,36 +10,50 @@ import { fileupload } from '../model/fileupload';
 })
 export class FileuploadComponent implements OnInit{
 
-  // Variable to store shortLink from api response
-  shortLink: string = "";
-  loading: boolean = false; // Flag variable
-  file: File = null; // Variable to store file
+  
+  @Input()
+    requiredFileType:string;
 
-  // Inject service 
-  constructor(private fileuploadservice:fileupload ) { }
+    fileName = '';
+    uploadProgress:number;
+    uploadSub: Subscription;
 
+    constructor(private http: HttpClient) {}
   ngOnInit(): void {
+   
   }
 
-  // On file Select
-  onChange(event) {
-      this.file = event.target.files[0];
-  }
+    onFileSelected(event) {
+        const file:File = event.target.files[0];
+      
+        if (file) {
+            this.fileName = file.name;
+            const formData = new FormData();
+            formData.append("thumbnail", file);
 
-  // OnClick of button Upload
-  onUpload() {
-      this.loading = !this.loading;
-    /*   console.log(this.file); */
-      this.fileuploadservice.Upload(this.file).subscribe(
-          (event: any) => {
-              if (typeof (event) === 'object') {
-
-                  // Short link via api response
-                  this.shortLink = event.link;
-
-                  this.loading = false; // Flag variable 
+            const upload$ = this.http.post("/api/thumbnail-upload", formData, {
+                reportProgress: true,
+                observe: 'events'
+            })
+            .pipe(
+                finalize(() => this.reset())
+            );
+          
+            this.uploadSub = upload$.subscribe(event => {
+              if (event.type == HttpEventType.UploadProgress) {
+                this.uploadProgress = Math.round(100 * (event.loaded / event.total));
               }
-          }
-      );
+            })
         }
+    }
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = null;
+    this.uploadSub = null;
+  }
 }

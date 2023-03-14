@@ -1,20 +1,27 @@
-<div class="text-center">
-	<input class="form-control" type="file"(change)="onChange($event)">
+<input type="file" class="file-input"
+       [accept]="requiredFileType"
+       (change)="onFileSelected($event)" #fileUpload>
 
-	<button (click)="onUpload()"class="btn btn-success">Upload</button>
-	
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()">
+        <mat-icon>attach_file</mat-icon>
+
+    </button>
 
 </div>
 
-<!-- Shareable short link of uploaded file -->
-<div class="container text-center jumbotron"
-	*ngIf="shortLink">
-	<h2> Visit Here</h2>
-	<a href="{{shortLink}}">{{shortLink}}</a>
-</div>
+<div class="progress">
 
-<!--Flag variable is used here-->
-<div class="container" *ngIf="loading">
-	<h3>Loading ...</h3>
+  <mat-progress-bar class="progress-bar" mode="determinate"
+                    [value]="uploadProgress" *ngIf="uploadProgress">
+
+  </mat-progress-bar>
+
+  <mat-icon class="cancel-upload" (click)="cancelUpload()" 
+            *ngIf="uploadProgress">delete_forever</mat-icon>
+
 </div>
-<router-outlet></router-outlet>

@@ -10,7 +10,7 @@ import { UpdateemployeeComponent } from './updateemployee/updateemployee.compone
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { AdminComponent } from './admin/admin.component';
 import { ExcelsheetComponent } from './excelsheet/excelsheet.component';
-import { DownloadComponent } from './download/download.component';
+
 
 const routes: Routes = [
    { path: '',redirectTo: 'home',  pathMatch: 'full'},  
@@ -24,7 +24,7 @@ const routes: Routes = [
    {path:'employeedetails/:employeeId',component:EmployeedetailsComponent},
    {path:'fileupload',component:FileuploadComponent},
    {path:'excelsheet',component:ExcelsheetComponent},
-   {path:'download',component:DownloadComponent}   
+      
    
 ];
 
